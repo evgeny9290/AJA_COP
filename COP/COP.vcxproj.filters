@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\AJA">
+      <UniqueIdentifier>{3fa70454-c695-4430-9673-a60d7451dd37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AJA_Data_Types">
+      <UniqueIdentifier>{a470d0b3-4c6a-48da-a46d-dcb48b832b2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OptionMaker">
+      <UniqueIdentifier>{d0c884b4-9aec-4e63-840a-37d156668ee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\COPSolver">
+      <UniqueIdentifier>{bc966d0b-c6d9-459c-9ee3-65e268f24000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GradeCalculator">
+      <UniqueIdentifier>{25996a37-9b33-4398-b8d7-c04587fc1db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FeasibilityChecker">
+      <UniqueIdentifier>{eb7f2373-37de-48c5-8246-f9c0941e439f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AJA_Data_Types.cpp">
+      <Filter>Header Files\AJA_Data_Types</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="COPSolver_inl.h">
+      <Filter>Header Files\COPSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="COPSolver.h">
+      <Filter>Header Files\COPSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="COPSolver_A.h">
+      <Filter>Header Files\COPSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="COPSolver_A_inl.h">
+      <Filter>Header Files\COPSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="COPSolver_B.h">
+      <Filter>Header Files\COPSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="COPSolver_B_inl.h">
+      <Filter>Header Files\COPSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionMaker.h">
+      <Filter>Header Files\OptionMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionMaker_A.h">
+      <Filter>Header Files\OptionMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionMaker_A_inl.h">
+      <Filter>Header Files\OptionMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionMaker_B.h">
+      <Filter>Header Files\OptionMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionMaker_B_inl.h">
+      <Filter>Header Files\OptionMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionMaker_inl.h">
+      <Filter>Header Files\OptionMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="GradeCalculator.h">
+      <Filter>Header Files\GradeCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="GradeCalculator_A.h">
+      <Filter>Header Files\GradeCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="GradeCalculator_A_inl.h">
+      <Filter>Header Files\GradeCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="GradeCalculator_B.h">
+      <Filter>Header Files\GradeCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="GradeCalculator_B_inl.h">
+      <Filter>Header Files\GradeCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="GradeCalculator_inl.h">
+      <Filter>Header Files\GradeCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="FeasibilityChecker.h">
+      <Filter>Header Files\FeasibilityChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="FeasibilityChecker_A.h">
+      <Filter>Header Files\FeasibilityChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="FeasibilityChecker_A_inl.h">
+      <Filter>Header Files\FeasibilityChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="FeasibilityChecker_B.h">
+      <Filter>Header Files\FeasibilityChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="FeasibilityChecker_B_inl.h">
+      <Filter>Header Files\FeasibilityChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="FeasibilityChecker_inl.h">
+      <Filter>Header Files\FeasibilityChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="AJA_inl.h">
+      <Filter>Header Files\AJA</Filter>
+    </ClInclude>
+    <ClInclude Include="AJA.h">
+      <Filter>Header Files\AJA</Filter>
+    </ClInclude>
+    <ClInclude Include="AJA_Data_Types.h">
+      <Filter>Header Files\AJA_Data_Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilityFuncs.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
