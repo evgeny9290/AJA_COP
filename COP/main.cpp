@@ -60,9 +60,6 @@ int main(){
 
 			aja.SetCopSolver(&SHCSolver);
 		}
-		//if (day == 36) {
-		//	std::cout << "a" << std::endl;
-		//}
 
 		res = aja.getAssigments(aja.m_AJA_In, aja.m_AJA_Out);
 		greedyLoopSolver.SetLoop(true);
