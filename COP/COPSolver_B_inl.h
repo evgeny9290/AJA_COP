@@ -34,12 +34,6 @@ std::shared_ptr<COP_Data> COPSolver_B<T>::RunCOP(std::shared_ptr<COP_Data> a_COP
 	}
 
 	if (!cannotHappendAtSameTime) {
-		// handle the over saturation of the result (already have feasibly assignment but want to reduce)
-		//for (int i = 0; i < COPSolver<T>::m_types->numDemandPoints; i++) {
-		//	remaningDemandSolution = a_COP_Data->solutionDemandSum[i] - a_COP_Data->COPDemand[i];
-		//	if (remaningDemandSolution > 0) break;
-		//}
-
 		////solution is already feasibl BUT still want to reduce it via greedy method
 		//while (COPSolver_B<T>::checkConstraintsFeasibility(a_COP_Data) && remaningDemandSolution > 0) {
 			for (size_t demandPoint = 0; demandPoint < COPSolver<T>::m_types->numDemandPoints; demandPoint++) {
@@ -62,21 +56,7 @@ std::shared_ptr<COP_Data> COPSolver_B<T>::RunCOP(std::shared_ptr<COP_Data> a_COP
 					remaningDemandSolution -= additionalDemand;
 				}
 			}
-		//}
 	}
-
-	//std::cout << "objective function value : " << a_COP_Data->gradeCandidate << std::endl;
-	//for (size_t i = 0; i < COPSolver<T>::m_types->numSuppliers; i++)
-	//{
-	//	for (size_t j = 0; j < COPSolver<T>::m_types->numDemandPoints; j++)
-	//	{
-	//		//assert(i * m_types->numDemandPoints + j < m_types->numSuppliers* m_types->numDemandPoints);
-	//		int Xval = a_COP_Data->COPcandidate[i * COPSolver<T>::m_types->numDemandPoints + j];
-	//		std::cout << "\t X[" << i << "][" << j << "] = " << Xval << " ";
-	//	}
-	//	std::cout << std::endl;
-	//
-	//}
 
 	m_currSupplier++;
 	return a_COP_Data;

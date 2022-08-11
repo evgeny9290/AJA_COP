@@ -28,19 +28,6 @@ std::shared_ptr<COP_Data> COPSolver_A<T>::RunCOP(std::shared_ptr<COP_Data> a_COP
 		a_COP_Data->candidateDemandSum[demandPoint] += guess; // update demand sum with guess
 		a_COP_Data->candidateSupplySum[supplier] += guess; // update supply sum with guess
 	}
-
-	//std::cout << "objective function value : " << a_COP_Data->gradeCandidate << std::endl;
-//for (size_t i = 0; i < COPSolver<T>::m_types->numSuppliers; i++)
-//{
-//	for (size_t j = 0; j < COPSolver<T>::m_types->numDemandPoints; j++)
-//	{
-//		//assert(i * m_types->numDemandPoints + j < m_types->numSuppliers* m_types->numDemandPoints);
-//		int Xval = a_COP_Data->COPcandidate[i * COPSolver<T>::m_types->numDemandPoints + j];
-//		std::cout << "\t X[" << i << "][" << j << "] = " << Xval << " ";
-//	}
-//	std::cout << std::endl;
-
-//}
 	return a_COP_Data;
 }
 

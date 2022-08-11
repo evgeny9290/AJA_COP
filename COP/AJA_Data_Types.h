@@ -17,8 +17,8 @@ public:
 	using supplyArray = std::array<int, numSuppliers>;
 	using demandArray = std::array<int, numDemandPoints>;
 	using costArray = std::array<int, numSuppliers * numDemandPoints>;
-	using transportationCostArray = std::array<int, numSuppliers * numDemandPoints>;
-	using decisionVariableX = std::array<int, numDemandPoints * numSuppliers>; // x[i][j] = cost
+	using transportationCostArray = std::array<int, numSuppliers * numDemandPoints>; // X[i][j] = transition cost
+	using decisionVariableX = std::array<int, numDemandPoints * numSuppliers>; // x[i][j] = unit cost
 	using perDayResultsArray = std::vector<std::pair<double, decisionVariableX>>; // (grade result, assignment result)
 
 public:
@@ -72,10 +72,10 @@ public:
 
 		decisionVariableX solution;
 		decisionVariableX candidate;
-		std::array<int, numDemandPoints> candidateDemandSum;
-		std::array<int, numSuppliers> candidateSupplySum;
-		std::array<int, numDemandPoints> solutionDemandSum;
-		std::array<int, numSuppliers> solutionSupplySum;
+		std::array<int, numDemandPoints> candidateDemandSum; // cols sum 
+		std::array<int, numSuppliers> candidateSupplySum; // rows sum
+		std::array<int, numDemandPoints> solutionDemandSum; // cols sum
+		std::array<int, numSuppliers> solutionSupplySum; // rows sum
 		perDayResultsArray results;
 		double gradeCandidate;
 		unsigned int currDay;

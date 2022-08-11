@@ -33,7 +33,7 @@ int main(){
 	
 	// solving
 	std::shared_ptr<AJA_Out> res = nullptr;
-	unsigned int daysDuration = 6;
+	unsigned int daysDuration = 2;
 	double SPdifference = 0;
 	bool greedyFirst = false;
 	//types->m_AJA_Data->Supply = { 17,17,20,17,20 };
