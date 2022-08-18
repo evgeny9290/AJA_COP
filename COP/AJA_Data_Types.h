@@ -4,6 +4,7 @@
 #include <memory>
 #include <array>
 #include <vector>
+#include <iostream>
 
 class AJA_Data_Types{
 public:
@@ -37,6 +38,8 @@ public:
 		initCost2DArray();
 		initTransportationCost2DArray();
 		initInitialSolution();
+		initDemandPrioArray();
+		sortArrayByPrio();
 		m_AJA_Data->results.push_back({ 0 , m_AJA_Data->solution }); // init vector so first entry is dummy (in order to get the prev day)
 	}
 
@@ -44,6 +47,7 @@ public:
 		AJA_Data(unsigned long a_seed, double a_vaultChangePercentage)
 			:Supply{},
 			Demand{},
+			DemandPrio{},
 			Cost{},
 			solution{},
 			candidate{},
@@ -67,6 +71,7 @@ public:
 		//smartPtr1Dint Cost;
 		supplyArray Supply;
 		demandArray Demand;
+		demandArray DemandPrio;
 		costArray Cost;
 		transportationCostArray transportationCost;
 
@@ -102,6 +107,7 @@ public:
 		COP_Data()
 			:COPSupply{},
 			COPDemand{},
+			COPDemandPrio{},
 			COPCost{},
 			COPsolution{},
 			COPcandidate{},
@@ -121,6 +127,7 @@ public:
 		//smartPtr1Dint COPCost;
 		supplyArray COPSupply;
 		demandArray COPDemand;
+		demandArray COPDemandPrio;
 		costArray COPCost;
 		transportationCostArray COPtransportationCost;
 
@@ -155,8 +162,10 @@ private:
 	void initCost2DArray();
 	void initSupplyArray();
 	void initDemandArray();
+	void initDemandPrioArray();
 	void initInitialSolution();
 	void initTransportationCost2DArray();
+	void sortArrayByPrio();
 private:
 	std::mt19937 ReproducibleRandomEngine;
 	unsigned long m_seed;

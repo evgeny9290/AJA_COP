@@ -1,6 +1,7 @@
 #include "AJA_Data_Types.h"
 #include <iostream>
 #include <assert.h>
+#include <map>
 
 void AJA_Data_Types::initCost2DArray() {
 	std::uniform_int_distribution<int> UIntDistForCost(0, 100);
@@ -51,6 +52,36 @@ void AJA_Data_Types::initDemandArray() {
 		m_AJA_Data->Demand[i] = UIntDistForDemand(ReproducibleRandomEngine);
 		m_AJA_Data->candidateDemandSum[i] = 0;
 		m_AJA_Data->solutionDemandSum[i] = 0;
+	}
+}
+
+void AJA_Data_Types::initDemandPrioArray() {
+	std::uniform_int_distribution<int> UIntDistForDemandPointPrio(0, numDemandPoints - 1);
+	bool check;
+	int n;
+	for (size_t i = 0; i < numDemandPoints; i++) {
+		do {
+			n = UIntDistForDemandPointPrio(ReproducibleRandomEngine);
+			check = true;
+			for (int j = 0; j < i; j++)
+				if (n == m_AJA_Data->DemandPrio[j]) //if number is already used
+				{
+					check = false; //set check to false
+					break;
+				}
+		} while (!check); //loop until new, unique number is found
+		m_AJA_Data->DemandPrio[i] = n;
+	}
+}
+
+void AJA_Data_Types::sortArrayByPrio() {
+	std::map<int, int> m;
+	for (size_t i = 0; i < numDemandPoints; i++) {
+		m[m_AJA_Data->DemandPrio[i]] = m_AJA_Data->Demand[i];
+	}
+
+	for (size_t i = 0; i < numDemandPoints; i++) {
+		m_AJA_Data->Demand[i] = m[i];
 	}
 }
 
@@ -141,6 +172,32 @@ void AJA_Data_Types::AJA_Data::resetVault() {
 		Demand[i] = UIntDistForDemand(AJAReproducibleRandomEngine);
 	}
 
+	std::uniform_int_distribution<int> UIntDistForDemandPointPrio(0, numDemandPoints - 1);
+	bool check;
+	int n;
+	for (size_t i = 0; i < numDemandPoints; i++) {
+		do {
+			n = UIntDistForDemandPointPrio(AJAReproducibleRandomEngine);
+			check = true;
+			for (int j = 0; j < i; j++)
+				if (n == DemandPrio[j]) //if number is already used
+				{
+					check = false; //set check to false
+					break;
+				}
+		} while (!check); //loop until new, unique number is found
+		DemandPrio[i] = n;
+	}
+
+	std::map<int, int> m; // map is sorted by keys when iterated upon, we will use that fact to sort the demand according to its priority.
+	for (size_t i = 0; i < numDemandPoints; i++) {
+		m[DemandPrio[i]] = Demand[i];
+	}
+
+	for (size_t i = 0; i < numDemandPoints; i++) {
+		Demand[i] = m[i];
+	}
+
 	std::fill(candidateDemandSum.begin(), candidateDemandSum.end(), 0);
 	std::fill(candidateSupplySum.begin(), candidateSupplySum.end(), 0);
 	std::fill(solutionDemandSum.begin(), solutionDemandSum.end(), 0);
@@ -148,4 +205,6 @@ void AJA_Data_Types::AJA_Data::resetVault() {
 	std::fill(solution.begin(), solution.end(), 0);
 	std::fill(candidate.begin(), candidate.end(), 0);
 	gradeCandidate = 0;
+
+
 }

@@ -19,6 +19,7 @@ std::shared_ptr<COP_Data> COPSolver<T>::setCOP_Data(std::shared_ptr<AJA_Data> a_
 	m_COP_Data->greedySolved = a_AJA_Data->greedySolved;
 	m_COP_Data->solved = false;
 	m_COP_Data->resultFractions = a_AJA_Data->resultFractions;
+	m_COP_Data->COPDemandPrio = a_AJA_Data->DemandPrio;
 
 	return m_COP_Data;
 }
@@ -30,10 +31,6 @@ bool COPSolver<T>::checkConstraintsFeasibility(std::shared_ptr<COP_Data> a_COP_D
 	//adding the demand for this supply point // (sum of row i <= total supply i) 
 	//if even one point isnt satisfied return false
 	for (size_t i = 0; i < m_types->numSuppliers; i++) {
-		//sumConstraint = 0;
-		//for (int j = 0; j < m_types->numDemandPoints; j++) {
-		//	sumConstraint += a_COP_Data->COPcandidate[i][j];
-		//}
 		if (a_COP_Data->candidateSupplySum[i] > a_COP_Data->COPSupply[i]) {
 			return false;
 		}
@@ -42,10 +39,6 @@ bool COPSolver<T>::checkConstraintsFeasibility(std::shared_ptr<COP_Data> a_COP_D
 	//adding the supply for this demand point // (sum of col i >= total demand i) 
 	//if even one point isnt satisfied return false
 	for (size_t i = 0; i < m_types->numDemandPoints; i++) {
-		//sumConstraint = 0;
-		//for (int j = 0; j < m_types->numSuppliers; j++) {
-		//	sumConstraint += a_COP_Data->COPcandidate[j][i];
-		//}
 		if (a_COP_Data->candidateDemandSum[i] < a_COP_Data->COPDemand[i]) {
 			return false;
 		}
@@ -123,7 +116,6 @@ std::shared_ptr<COP_Data> COPSolver<T>::getFullGrade(std::shared_ptr<COP_Data> a
 								 0.1 * (10 * absDifference) +
 								 0.1 * (10 * abs(absTransportationDifference));
 
-	//m_resFractions = resFractions = "0.8 * " + std::to_string(solutionCostGrade) + " + 0.1 * 10 * " + std::to_string(absDifference) + " + 0.1 * 10 * " + std::to_string(abs(absTransportationDifference));
 	m_resFractions = resFractions = std::to_string(0.8 * solutionCostGrade) + " + " + std::to_string(0.1 * (10 * absDifference)) + " + " + std::to_string(0.1 * 10 * abs(absTransportationDifference));
 
 	return a_COP_Data;
@@ -149,18 +141,19 @@ std::shared_ptr<AJA_Data> COPSolver<T>::setAJA_Data(std::shared_ptr<COP_Data> a_
 	m_AJA_Data->solved = a_COP_Data->solved;
 	m_AJA_Data->greedySolved = a_COP_Data->greedySolved;
 	m_AJA_Data->resultFractions = a_COP_Data->resultFractions;
+	m_AJA_Data->DemandPrio = a_COP_Data->COPDemandPrio;
 
 	return m_AJA_Data;
 }
 
 template<typename T>
 std::shared_ptr<AJA_Data> COPSolver<T>::getBestAssigment(std::shared_ptr<AJA_Data> a_AJA_Data) {
-	if (!checkRandGeneratedProbFeasility(a_AJA_Data)) {
-		std::cout << "demand greater than supply, cannot solve" << std::endl;
-		a_AJA_Data->resetVault();
+	if (!checkRandGeneratedProbFeasility(a_AJA_Data) && a_AJA_Data->solved) {
+		std::cout << "demand greater than supply, need to partially solve by priority" << std::endl;
+		//a_AJA_Data->resetVault();
 		a_AJA_Data->solved = false;
-		a_AJA_Data->results.push_back({ -1 , m_COP_Data->COPsolution });
-
+		//a_AJA_Data->results.push_back({ -1 , m_COP_Data->COPsolution });
+		a_AJA_Data->results.push_back({ m_COP_Data->bestGradeCandidate , m_COP_Data->COPsolution });
 		m_COP_Data = setCOP_Data(a_AJA_Data);
 		a_AJA_Data = setAJA_Data(m_COP_Data);
 		return a_AJA_Data;

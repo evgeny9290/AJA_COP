@@ -17,20 +17,20 @@ class COPSolver {
 	template<typename T> friend class AJA;
 public:
 	COPSolver(const std::vector<std::shared_ptr<T>>& a_global,
-			  GradeCalculator<T>* a_gradeCalculator,
-			  std::shared_ptr<AJA_Data_Types> a_types,
-			  unsigned long a_seed)
+		GradeCalculator<T>* a_gradeCalculator,
+		std::shared_ptr<AJA_Data_Types> a_types,
+		unsigned long a_seed)
 		: m_Global_ptr(a_global),
-		  m_gradeCalculator(a_gradeCalculator),
-		  m_types(a_types),
-		  m_AJA_Data(a_types->m_AJA_Data),
-		  m_COP_Data(a_types->m_COP_Data),
-		  m_seed(a_seed),
-		  m_ValueOfCurrentSolution(),
-		  m_currCandidate(),
-		  m_resFractions(""),
-		  m_currDemandSum{},
-		  m_currSupplySum{}
+		m_gradeCalculator(a_gradeCalculator),
+		m_types(a_types),
+		m_AJA_Data(a_types->m_AJA_Data),
+		m_COP_Data(a_types->m_COP_Data),
+		m_seed(a_seed),
+		m_ValueOfCurrentSolution(),
+		m_currCandidate(),
+		m_resFractions(""),
+		m_currDemandSum{},
+		m_currSupplySum{}
 
 		{
 			ReproducibleRandomEngine.seed(m_seed);
@@ -41,6 +41,7 @@ public:
 public:
 	//methods
 	std::shared_ptr<AJA_Data> getBestAssigment(std::shared_ptr<AJA_Data> a_AJA_Data);
+
 protected:
 	//params
 	std::vector<std::shared_ptr<T>> m_Global_ptr;

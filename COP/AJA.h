@@ -7,6 +7,7 @@
 //#include "OptionMaker.h"
 #include "COPSolver_A.h"
 #include "COPSolver_B.h"
+#include "COPSolver_C.h"
 #include "OptionMaker_A.h"
 #include "OptionMaker_B.h"
 #include "GradeCalculator_A.h"
@@ -25,6 +26,7 @@ struct AJA_Out {
 		solution{},
 		Supply{},
 		Demand{},
+		DemandPrio{},
 		results{},
 		currDay{},
 		solved{},
@@ -35,10 +37,9 @@ struct AJA_Out {
 	double finalGrade;
 	unsigned int currDay;
 	std::array<int, AJA_Data_Types::numDemandPoints * AJA_Data_Types::numSuppliers> solution;
-	//std::shared_ptr<int[]> Supply;
-	//std::shared_ptr<int[]> Demand;
 	std::array<int, AJA_Data_Types::numSuppliers> Supply;
 	std::array<int, AJA_Data_Types::numDemandPoints> Demand;
+	std::array<int, AJA_Data_Types::numDemandPoints> DemandPrio;
 	std::vector<std::pair<double, std::array<int, AJA_Data_Types::numDemandPoints* AJA_Data_Types::numSuppliers>>> results;
 };
 

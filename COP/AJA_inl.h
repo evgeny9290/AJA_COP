@@ -13,6 +13,7 @@ std::shared_ptr<AJA_Out> AJA<T>::getAssigments(std::shared_ptr<AJA_In> a_AJA_In,
 	a_AJA_Out->currDay = res->currDay;
 	a_AJA_Out->solved = res->solved;
 	a_AJA_Out->resultFractions = res->resultFractions;
+	a_AJA_Out->DemandPrio = res->DemandPrio;
 	return a_AJA_Out;
 }
 
@@ -59,15 +60,6 @@ void AJA<T>::SetCopSolver(COPSolver<T>* a_solver) {
 }
 
 std::ostream& operator<<(std::ostream& os, const AJA_Out& GV) {
-	//os << "objective function value: " << GV.finalGrade  << " at day: " << GV.currDay - 1 << std::endl;
-	//for (size_t i = 0; i < AJA_Data_Types::numSuppliers; i++) {
-	//	for (size_t j = 0; j < AJA_Data_Types::numDemandPoints; j++) {
-	//		assert(i * AJA_Data_Types::numDemandPoints + j < AJA_Data_Types::numSuppliers * AJA_Data_Types::numDemandPoints);
-	//		os << "\tX[" << i << "][" << j << "] = " << GV.solution[i * AJA_Data_Types::numDemandPoints + j] << " ";
-	//	}
-	//	os << std::endl;
-	//}
-	//os << std::endl;
 	for (size_t i = 0; i < AJA_Data_Types::numSuppliers; i++) {
 		os << "\tSupply[" << i << "] = " << GV.Supply[i] << " ";
 
@@ -77,6 +69,5 @@ std::ostream& operator<<(std::ostream& os, const AJA_Out& GV) {
 		os << "\tDemand[" << i << "] = " << GV.Demand[i] << " ";
 
 	}
-
 	return os;
 }

@@ -70,7 +70,7 @@ bool COPSolver_B<T>::RestartCritirionReached() {
 
 template<typename T>
 bool COPSolver_B<T>::AcceptanceCritirionReached(std::shared_ptr<COP_Data> a_COP_Data) {
-	return (a_COP_Data->gradeCandidate < COPSolver_B<T>::m_ValueOfCurrentSolution) && COPSolver_B<T>::checkConstraintsFeasibility(a_COP_Data);
+	return (a_COP_Data->gradeCandidate < COPSolver<T>::m_ValueOfCurrentSolution) && COPSolver<T>::checkConstraintsFeasibility(a_COP_Data);
 
 }
 

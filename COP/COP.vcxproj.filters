@@ -125,5 +125,11 @@
     <ClInclude Include="UtilityFuncs.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="COPSolver_C.h">
+      <Filter>Header Files\COPSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="COPSolver_C_inl.h">
+      <Filter>Header Files\COPSolver</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

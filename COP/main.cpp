@@ -28,18 +28,21 @@ int main(){
 	COPSolver_B<double> greedySolver(g_var, &gradeCalc, types, seed, false);
 	COPSolver_B<double> greedyLoopSolver(g_var, &gradeCalc, types, seed, true);
 	COPSolver_A<double> SHCSolver(g_var, &gradeCalc, types, seed);
+	COPSolver_C<double> greedySaturateByPrio(g_var, &gradeCalc, types, seed);
 	OptionMaker_B<double> optMaker(g_var, &feas, &gradeCalc, types);
 	AJA<double>& aja = AJA<double>::GetInstance(&SHCSolver, &optMaker, g_var, types);
 	
 	// solving
 	std::shared_ptr<AJA_Out> res = nullptr;
-	unsigned int daysDuration = 2;
+	unsigned int daysDuration = 60;
 	double SPdifference = 0;
 	bool greedyFirst = false;
-	//types->m_AJA_Data->Supply = { 17,17,20,17,20 };
-	//types->m_AJA_Data->Demand = { 11,21,18,0,16};
+	bool solvedForcedSaturation = false;
+	//types->m_AJA_Data->Supply = { 6,9,9,9,9 };
+	//types->m_AJA_Data->Demand = { 7,8,10,13,15};
 	//SPdifference = SupplyDemandDifferencePercentage(types->m_AJA_Data, types->numSuppliers, types->numDemandPoints);
 	//std::cout << SPdifference << std::endl;
+	//aja.SetCopSolver(&greedySaturateByPrio);
 	//res = aja.getAssigments(aja.m_AJA_In, aja.m_AJA_Out);
 	//std::cout << *res << std::endl;
 
@@ -62,6 +65,13 @@ int main(){
 		}
 
 		res = aja.getAssigments(aja.m_AJA_In, aja.m_AJA_Out);
+		if (!res->solved) { // for priority assignment when supply < demand
+			aja.SetCopSolver(&greedySaturateByPrio);
+			res = aja.getAssigments(aja.m_AJA_In, aja.m_AJA_Out);
+			types->m_AJA_Data->resetVault();
+			solvedForcedSaturation = true;
+			aja.SetCopSolver(&SHCSolver);
+		}
 		greedyLoopSolver.SetLoop(true);
 	
 		if (!greedyFirst && res->solved) {
@@ -84,22 +94,16 @@ int main(){
 		}
 		else if (res->solved) {
 			WriteSolutionsAndValues(res->results[res->currDay - 1], res, types->numSuppliers, types->numDemandPoints, &m_ofBestValue, &m_ofCurrentValue);
-			types->m_AJA_Data->changeVaultForNextDay();
+			if (!solvedForcedSaturation) {
+				types->m_AJA_Data->changeVaultForNextDay();
+			}
 		}
 		std::cout << *res << std::endl;
 		std::cout << res->resultFractions << std::endl;
 		std::cout << "#############\nSHC result day: " << day << "\n#############" << std::endl;
-		//types->m_AJA_Data->changeVaultForNextDay();
+
 		greedyFirst = false;
-		//std::cout << "#############\nSHC result day: " << day <<"\n#############" << std::endl;
-		//std::cout << *res << std::endl;
-		//std::cout << "vec size: " << res->results.back().first << std::endl;
-		//if (res->solved) {
-		//	//std::cout <<"vec size: " << res->results.size() << std::endl;
-		//	//printCurrDayResults(res->results[day], types->numSuppliers, types->numDemandPoints);
-		//	//WriteSolutionsAndValues(res->results[day], res, types->numSuppliers, types->numDemandPoints, &m_ofBestValue, &m_ofCurrentValue);
-		//	types->m_AJA_Data->changeVaultForNextDay();
-		//}
+		solvedForcedSaturation = false;
 		types->m_COP_Data->bestGradeCandidate = INT_MAX;
 	}
 

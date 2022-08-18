@@ -152,6 +152,8 @@
     <ClInclude Include="COPSolver_A_inl.h" />
     <ClInclude Include="COPSolver_B.h" />
     <ClInclude Include="COPSolver_B_inl.h" />
+    <ClInclude Include="COPSolver_C.h" />
+    <ClInclude Include="COPSolver_C_inl.h" />
     <ClInclude Include="COPSolver_inl.h" />
     <ClInclude Include="FeasibilityChecker.h" />
     <ClInclude Include="FeasibilityChecker_A.h" />
